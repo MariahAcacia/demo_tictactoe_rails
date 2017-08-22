@@ -1,0 +1,18 @@
+<%= form_tag(make_move_path, :method => "POST") do %>
+  <table>
+    <% 3.times do |row| %>
+      <tr>
+        <% 3.times do |cell| %>
+          <td>
+            <% disabled = @board_arr[row][cell] %>
+            <%= radio_button_tag("move",
+                                 "#{row},#{cell}",
+                                 !disabled,
+                                 :disabled => disabled) %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag "Make Move" %>
+<% end %>

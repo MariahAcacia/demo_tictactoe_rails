@@ -1,53 +1,18 @@
 <h1>Welcome to TicTacToe!</h1>
 
-<% if @game_over %>
-  <h2>
-    <%= @game_over %>
-  </h2>
-<% else %>
-  <h2>
-    It is player <%= @current_player %>'s turn!
-  </h2>
+<%= render :partial => "shared/ttt_header",
+           :locals => { :current_player => @current_player,
+                        :game_over => @game_over} %>
 
-  <p>
-    Enter your selection using the form below
-  </p>
-<% end %>
-
-<pre>
-  <table>
-    <% @board_arr.each do |row| %>
-      <tr>
-        <% row.each do |cell| %>
-          <td>
-            <%= cell.nil? ? '-' : cell %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
-</pre>
+<%= render :partial => "shared/ttt_board",
+           :locals => { :board_arr => @board_arr } %>
 
 <% if @game_over %>
+
   <%= link_to "Play Again!", new_path %>
+
 <% else %>
 
-  <%= form_tag(make_move_path, :method => "POST") do %>
-    <table>
-      <% 3.times do |row| %>
-        <tr>
-          <% 3.times do |cell| %>
-            <td>
-              <% disabled = @board_arr[row][cell] %>
-              <%= radio_button_tag("move",
-                                   "#{row},#{cell}",
-                                   !disabled,
-                                   :disabled => disabled) %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-    <%= submit_tag "Make Move" %>
-  <% end %>
+  <%= render :partial => "shared/ttt_form",
+             :locals => { :board_arr => @board_arr } %>
 <% end %>

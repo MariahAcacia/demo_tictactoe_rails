@@ -1,0 +1,13 @@
+<% if @game_over %>
+  <h2>
+    <%= @game_over %>
+  </h2>
+<% else %>
+  <h2>
+    It is player <%= @current_player %>'s turn!
+  </h2>
+
+  <p>
+    Enter your selection using the form below
+  </p>
+<% end %>

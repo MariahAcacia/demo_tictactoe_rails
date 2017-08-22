@@ -19,11 +19,8 @@ class TicTacToeController < ApplicationController
     @board.add_piece(retrieve_coords, @current_player)
 
     # check for game-ending conditions
-    if @board.winning_combo?(@current_player)
-      @game_over = "Game over player #{@current_player} WINS!"
-    elsif @board.full?
-      @game_over = "Game Over! You've drawn."
-    end
+    @game_over = game_over_message
+
     # now pass our board arr back to the view and save everything we want to save
     @board_arr = @board.board_arr
     switch_player
@@ -65,5 +62,12 @@ class TicTacToeController < ApplicationController
     params[:move].split(",").map(&:to_i)
   end
 
+  def game_over_message
+    if @board.winning_combo?(@current_player)
+      @game_over = "Game over, player #{@current_player} WINS!"
+    elsif @board.full?
+      @game_over = "Game Over! You've drawn"
+    end
+  end
 
 end

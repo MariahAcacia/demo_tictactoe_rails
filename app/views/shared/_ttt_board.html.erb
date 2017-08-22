@@ -1,0 +1,13 @@
+<pre>
+  <table>
+    <% @board_arr.each do |row| %>
+      <tr>
+        <% row.each do |cell| %>
+          <td>
+            <%= cell.nil? ? '-' : cell %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</pre>
